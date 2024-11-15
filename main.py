@@ -11,11 +11,11 @@ def start(screen:pygame.surface.Surface) -> bool:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
-        
+    
         # 没啥逻辑 把背景渲染一下
         screen.fill((200, 200, 255))
         pygame.display.flip()
-
+        
     return True
 
 def play_game(screen:pygame.surface.Surface) -> None:
