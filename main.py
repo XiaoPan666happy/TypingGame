@@ -21,7 +21,6 @@ def start(screen:pygame.surface.Surface,
         screen.fill((255, 255, 255))
         screen.blit(text1, (200, 175))
         screen.blit(text2, (220, 325))
-
         pygame.display.flip()
 
     return True
@@ -30,7 +29,21 @@ def play_game(screen:pygame.surface.Surface,
               font:pygame.font.Font,
               font_small:pygame.font.Font) -> None:
     """主函数"""
-    pass
+    
+    score = 0   # 得分
+    miss = 0    # 遗漏
+    combo = 0   # 连击
+    time = 0.0  # 时间
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        # 渲染
+        screen.fill((255, 255, 255))
+        pygame.display.flip()
 
 def init() -> tuple:
     """初始化"""
