@@ -32,12 +32,17 @@ def play_game(screen:pygame.surface.Surface,
     """主函数"""
     pass
 
-def main() -> None:
-    """控制函数"""
+def init() -> tuple:
+    """初始化"""
     screen = pygame.display.set_mode(SCREEN_SIZE)
     pygame.display.set_caption("打字游戏")
     font_big = pygame.font.Font(os.path.join(PATH, "font", "STKAITI.TTF"), 100)
     font_small = pygame.font.Font(os.path.join(PATH, "font", "STKAITI.TTF"), 25)
+    return (screen, font_big, font_small)
+
+def main() -> None:
+    """控制函数"""
+    screen, font_big, font_small = init()
     if start(screen, font_big, font_small):
         play_game(screen, font_big, font_small)
 
