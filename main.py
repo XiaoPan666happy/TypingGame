@@ -19,8 +19,8 @@ def start(screen:pygame.surface.Surface,
         text1 = font_big.render("打字游戏", True, (63, 72, 204))
         text2 = font_small.render("Please pressed enter and play the game", True, (63, 72, 204))
         screen.fill((255, 255, 255))
-        screen.blit(text1, (200, 200))
-        screen.blit(text2, (200, 350))
+        screen.blit(text1, (200, 175))
+        screen.blit(text2, (220, 325))
 
         pygame.display.flip()
 
