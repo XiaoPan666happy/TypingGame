@@ -51,16 +51,16 @@ def play_game(screen:pygame.surface.Surface,
         fps = int(clock.get_fps())
 
         text_fps = font_small.render(f"帧率    {fps}", True, (0, 0, 0))
+        text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
         text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
         text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
-        text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
 
         # 渲染
         screen.fill((255, 255, 255))
         screen.blit(text_fps, (10, 10))
-        screen.blit(text_score, (10, 40))
-        screen.blit(text_miss, (10, 70))
-        screen.blit(text_time, (10, 100))
+        screen.blit(text_time, (10, 40))
+        screen.blit(text_score, (10, 70))
+        screen.blit(text_miss, (10, 100))
         pygame.display.flip()
 
         # 控制帧率
