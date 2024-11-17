@@ -7,6 +7,7 @@ import pygame
 
 from config import *
 import letter
+import letter_group
 
 pygame.init()
 pygame.font.init()
@@ -42,7 +43,8 @@ def play_game(screen:pygame.surface.Surface,
     
     start_time = time.time()
     clock = pygame.time.Clock()
-    letter_obj = letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
+    i = 0
+    my_letter_group = letter_group.LetterGroup(letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690)))
     running = True
 
     while running:
@@ -50,12 +52,15 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
-        if letter_obj.key_doun_():
-            letter_obj.__init__(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
+        if my_letter_group.key_doun_():
+            my_letter_group.out()
             score += 1
-        elif letter_obj.need_del_():
-            letter_obj.__init__(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
+        elif my_letter_group.need_del_():
+            my_letter_group.out()
             miss += 1
+        
+        if i % 100 == 0:
+            my_letter_group.add(letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690)))
 
         play_time = round((time.time() - start_time), 1)
         fps = int(clock.get_fps())
@@ -64,20 +69,24 @@ def play_game(screen:pygame.surface.Surface,
         text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
         text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
         text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
-
-        letter_obj.update()
+        
+        for my_letter in my_letter_group:
+            my_letter.update()
 
         # 渲染
         screen.fill((255, 255, 255))
-        letter_obj.draw(screen)
+        for my_letter in my_letter_group:
+            my_letter.draw(screen)
         screen.blit(text_fps, (10, 10))
         screen.blit(text_time, (10, 40))
         screen.blit(text_score, (10, 70))
         screen.blit(text_miss, (10, 100))
         pygame.display.flip()
-
+        
         # 控制帧率
         clock.tick(FPS)
+
+        i += 1
 
 def init() -> tuple:
     """初始化"""

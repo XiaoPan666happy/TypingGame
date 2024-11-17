@@ -1,7 +1,5 @@
 """字母类"""
 
-import os
-
 import pygame
 
 from config import *
