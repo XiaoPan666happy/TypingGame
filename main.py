@@ -1,10 +1,12 @@
 """主程序文件"""
 
 import time
+import random
 
 import pygame
 
 from config import *
+import letter
 
 pygame.init()
 pygame.font.init()
@@ -40,6 +42,7 @@ def play_game(screen:pygame.surface.Surface,
     
     start_time = time.time()
     clock = pygame.time.Clock()
+    letter_obj = letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
     running = True
 
     while running:
@@ -47,6 +50,13 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
+        if letter_obj.key_doun_():
+            letter_obj.__init__(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
+            score += 1
+        elif letter_obj.need_del_():
+            letter_obj.__init__(chr(random.randint(65, 90)), font_big, random.randint(10, 690))
+            miss += 1
+
         play_time = round((time.time() - start_time), 1)
         fps = int(clock.get_fps())
 
@@ -55,8 +65,11 @@ def play_game(screen:pygame.surface.Surface,
         text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
         text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
 
+        letter_obj.update()
+
         # 渲染
         screen.fill((255, 255, 255))
+        letter_obj.draw(screen)
         screen.blit(text_fps, (10, 10))
         screen.blit(text_time, (10, 40))
         screen.blit(text_score, (10, 70))
