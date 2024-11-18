@@ -52,8 +52,8 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
-        if my_letter_group.key_doun_():
-            my_letter_group.out()
+        if my_letter_group.key_doun_(i):
+            my_letter_group.out(i)
             score += 1
         elif my_letter_group.need_del_():
             my_letter_group.out()

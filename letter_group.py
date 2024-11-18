@@ -8,6 +8,7 @@ class LetterGroup:
     
     def __init__(self, *value):
         self.values = list(value)
+        self.i = 0
     
     def __iter__(self):
         '''返回迭代器 就是自己'''
@@ -25,9 +26,10 @@ class LetterGroup:
         '''入队'''
         self.values.append(value)
 
-    def out(self):
+    def out(self, i:int):
         '''出队'''
         if len(self.values) > 0:
+            self.i = i
             return self.values.pop(0)
     
     def need_del_(self) -> bool:
@@ -35,7 +37,7 @@ class LetterGroup:
             return self.values[0].need_del_()
         return False
 
-    def key_doun_(self) -> bool:
-        if len(self.values) > 0:
+    def key_doun_(self, i) -> bool:
+        if len(self.values) > 0 and i-self.i >= 20:
             return self.values[0].key_doun_()
         return False
