@@ -22,11 +22,11 @@ class Letter:
         screen.blit(text, (self.x, self.y))
     
     def need_del_(self) -> bool:
-        if self.y > SCREEN_SIZE[1]:
+        if self.y > 600:
             return True
         return False
     
     def key_doun_(self) -> bool:
-        if pygame.key.get_pressed()[ord(self.letter)+32]:
+        if pygame.key.get_pressed()[ord(self.letter)+32] and self.y > 0:
             return True
         return False

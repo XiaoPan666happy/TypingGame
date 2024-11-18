@@ -44,7 +44,7 @@ def play_game(screen:pygame.surface.Surface,
     start_time = time.time()
     clock = pygame.time.Clock()
     i = 0
-    my_letter_group = letter_group.LetterGroup(letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690)))
+    my_letter_group = letter_group.LetterGroup()
     running = True
 
     while running:
