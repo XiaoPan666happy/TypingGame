@@ -54,9 +54,12 @@ def play_game(screen:pygame.surface.Surface,
         
         if my_letter_group.key_doun_(i):
             my_letter_group.out(i)
+            combo += 1
             score += 1
         elif my_letter_group.need_del_():
             my_letter_group.out()
+            score += combo * (combo // 2)
+            combo = 0
             miss += 1
         
         if i % 100 == 0:
@@ -69,6 +72,10 @@ def play_game(screen:pygame.surface.Surface,
         text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
         text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
         text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
+        if combo >= 2:
+            text_combo = font_small.render(f"连击 {combo}", True, (0, 0, 0))
+        else:
+            text_combo = None
         
         for my_letter in my_letter_group:
             my_letter.update()
@@ -81,6 +88,8 @@ def play_game(screen:pygame.surface.Surface,
         screen.blit(text_time, (10, 40))
         screen.blit(text_score, (10, 70))
         screen.blit(text_miss, (10, 100))
+        if not(text_combo is None):
+            screen.blit(text_combo, (350, 390))
         pygame.display.flip()
         
         # 控制帧率
