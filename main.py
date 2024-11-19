@@ -44,6 +44,7 @@ def play_game(screen:pygame.surface.Surface,
     start_time = time.time()
     clock = pygame.time.Clock()
     i = 0
+    miss_i = -21
     my_letter_group = letter_group.LetterGroup()
     running = True
 
@@ -60,6 +61,7 @@ def play_game(screen:pygame.surface.Surface,
             score += 1
         elif my_letter_group.need_del_():
             my_letter_group.out()
+            miss_i = i
             score += combo * (combo // 2)
             combo = 0
             miss += 1
@@ -75,7 +77,10 @@ def play_game(screen:pygame.surface.Surface,
         text_fps = font_small.render(f"帧率    {fps}", True, (0, 0, 0))
         text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
         text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
-        text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
+        if i - miss_i <= 20:
+            text_miss = font_small.render(f"遗漏    {miss}", True, (255, 0, 0))
+        else:
+            text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
         if combo >= 2:
             text_combo = font_small.render(f"连击 {combo}", True, (0, 0, 0))
         else:
