@@ -45,6 +45,7 @@ def play_game(screen:pygame.surface.Surface,
     clock = pygame.time.Clock()
     i = 0
     miss_i = -21
+    score_i = -21
     my_letter_group = letter_group.LetterGroup()
     running = True
 
@@ -57,6 +58,7 @@ def play_game(screen:pygame.surface.Surface,
 
         if my_letter_group.key_doun_(i):
             my_letter_group.out(i)
+            score_i = i
             combo += 1
             score += 1
         elif my_letter_group.need_del_():
@@ -76,13 +78,19 @@ def play_game(screen:pygame.surface.Surface,
 
         text_fps = font_small.render(f"帧率    {fps}", True, (0, 0, 0))
         text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
-        text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
+        if i - score_i <= 20:
+            text_score = font_small.render(f"得分    {score}", True, (34, 177, 76))
+        else:
+            text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
         if i - miss_i <= 20:
             text_miss = font_small.render(f"遗漏    {miss}", True, (255, 0, 0))
         else:
             text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
         if combo >= 2:
-            text_combo = font_small.render(f"连击 {combo}", True, (0, 0, 0))
+            if i - score_i <= 20:
+                text_combo = font_small.render(f"连击 {combo}", True, (34, 177, 76))
+            else:
+                text_combo = font_small.render(f"连击 {combo}", True, (0, 0, 0))
         else:
             text_combo = None
         
