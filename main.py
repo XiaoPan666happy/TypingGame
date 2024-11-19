@@ -52,6 +52,8 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
+        keys = pygame.key.get_pressed()
+
         if my_letter_group.key_doun_(i):
             my_letter_group.out(i)
             combo += 1
@@ -61,6 +63,8 @@ def play_game(screen:pygame.surface.Surface,
             score += combo * (combo // 2)
             combo = 0
             miss += 1
+        if keys[pygame.K_ESCAPE]:
+            running = False
         
         if i % 100 == 0:
             my_letter_group.add(letter.Letter(chr(random.randint(65, 90)), font_big, random.randint(10, 690)))
