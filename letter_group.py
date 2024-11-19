@@ -26,10 +26,11 @@ class LetterGroup:
         '''入队'''
         self.values.append(value)
 
-    def out(self, i:int):
+    def out(self, i:int=0):
         '''出队'''
         if len(self.values) > 0:
-            self.i = i
+            if i != 0:
+                self.i = i
             return self.values.pop(0)
     
     def need_del_(self) -> bool:
