@@ -39,6 +39,6 @@ class LetterGroup:
         return False
 
     def key_doun_(self, i) -> bool:
-        if len(self.values) > 0 and i-self.i >= 20:
+        if len(self.values) > 0:
             return self.values[0].key_doun_()
         return False

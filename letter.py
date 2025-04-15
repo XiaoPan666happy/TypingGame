@@ -27,6 +27,9 @@ class Letter:
         return False
     
     def key_doun_(self) -> bool:
-        if pygame.key.get_pressed()[ord(self.letter)+32] and self.y > 0:
+        keys = pygame.key.get_pressed()
+        if keys[ord(self.letter)] and self.y > 0:
+            return True
+        if keys[ord(self.letter.lower())] and self.y > 0:
             return True
         return False
