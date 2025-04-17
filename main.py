@@ -8,9 +8,13 @@ import pygame
 from config import *
 import letter
 import letter_group
+from get_windows_theme_mode import get_windows_theme_mode
 
 pygame.init()
 pygame.font.init()
+
+color1 = (255, 255, 255) if get_windows_theme_mode() == "light" else (0, 0, 0)
+color2 = (255, 255, 255) if get_windows_theme_mode() == "dark" else (0, 0, 0)
 
 def start(screen:pygame.surface.Surface, 
           font_big:pygame.font.Font,
@@ -24,7 +28,7 @@ def start(screen:pygame.surface.Surface,
         # 没啥逻辑 把背景渲染一下
         text1 = font_big.render("打字游戏", True, (63, 72, 204))
         text2 = font_small.render("Please pressed enter and play the game", True, (63, 72, 204))
-        screen.fill((255, 255, 255))
+        screen.fill(color1)
         screen.blit(text1, (195, 175))
         screen.blit(text2, (215, 325))
         pygame.display.flip()
@@ -76,21 +80,21 @@ def play_game(screen:pygame.surface.Surface,
         play_time = round((time.time() - start_time), 1)
         fps = int(clock.get_fps())
 
-        text_fps = font_small.render(f"帧率    {fps}", True, (0, 0, 0))
-        text_time = font_small.render(f"时间    {play_time}", True, (0, 0, 0))
+        text_fps = font_small.render(f"帧率    {fps}", True, color2)
+        text_time = font_small.render(f"时间    {play_time}", True, color2)
         if i - score_i <= 20:
             text_score = font_small.render(f"得分    {score}", True, (34, 177, 76))
         else:
-            text_score = font_small.render(f"得分    {score}", True, (0, 0, 0))
+            text_score = font_small.render(f"得分    {score}", True, color2)
         if i - miss_i <= 20:
             text_miss = font_small.render(f"遗漏    {miss}", True, (255, 0, 0))
         else:
-            text_miss = font_small.render(f"遗漏    {miss}", True, (0, 0, 0))
+            text_miss = font_small.render(f"遗漏    {miss}", True, color2)
         if combo >= 2:
             if i - score_i <= 20:
                 text_combo = font_small.render(f"连击 {combo}", True, (34, 177, 76))
             else:
-                text_combo = font_small.render(f"连击 {combo}", True, (0, 0, 0))
+                text_combo = font_small.render(f"连击 {combo}", True, color2)
         else:
             text_combo = None
         
@@ -98,7 +102,7 @@ def play_game(screen:pygame.surface.Surface,
             my_letter.update()
 
         # 渲染
-        screen.fill((255, 255, 255))
+        screen.fill(color1)
         for my_letter in my_letter_group:
             my_letter.draw(screen)
         screen.blit(text_fps, (10, 10))
