@@ -44,6 +44,7 @@ def play_game(screen:pygame.surface.Surface,
     miss = 0         # 遗漏
     combo = 0        # 连击
     play_time = 0.0  # 时间
+    level = 1        # 关卡
     
     start_time = time.time()
     clock = pygame.time.Clock()
@@ -58,6 +59,9 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
+        if level == 1 and score > 100:
+            level = 2
+
         keys = pygame.key.get_pressed()
 
         if my_letter_group.key_doun_(i):
@@ -97,9 +101,10 @@ def play_game(screen:pygame.surface.Surface,
                 text_combo = font_small.render(f"连击 {combo}", True, color2)
         else:
             text_combo = None
+        text_level = font_small.render(f"关卡    {level}", True, color2)
         
         for my_letter in my_letter_group:
-            my_letter.update()
+            my_letter.update(level)
 
         # 渲染
         screen.fill(color1)
@@ -109,6 +114,7 @@ def play_game(screen:pygame.surface.Surface,
         screen.blit(text_time, (10, 40))
         screen.blit(text_score, (10, 70))
         screen.blit(text_miss, (10, 100))
+        screen.blit(text_level, (10, 130))
         if not(text_combo is None):
             screen.blit(text_combo, (350, 390))
         pygame.display.flip()

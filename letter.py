@@ -14,8 +14,8 @@ class Letter:
         self.x = x
         self.y = -100
 
-    def update(self):
-        self.y += SPEED
+    def update(self, level):
+        self.y += SPEED*level
 
     def draw(self, screen:pygame.surface.Surface):
         text = self.font.render(self.letter, True, (63, 72, 204))
