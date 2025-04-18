@@ -59,8 +59,24 @@ def play_game(screen:pygame.surface.Surface,
             if event.type == pygame.QUIT:
                 running = False
         
-        if level == 1 and score > 100:
+        if level == 1 and score >= 100:
             level = 2
+        elif level == 2 and score >= 300:
+            level = 3
+        elif level == 3 and score >= 1000:
+            level = 4
+        elif level == 4 and score >= 2000:
+            level = 5
+        elif level == 5 and score >= 3000:
+            level = 6
+        elif level == 6 and score >= 4000:
+            level = 7
+        elif level == 7 and score >= 5000:
+            level = 8
+        elif level == 8 and score >= 6000:
+            level = 9
+        elif level == 29 and score >= 7000:
+            level = 10
 
         keys = pygame.key.get_pressed()
 
